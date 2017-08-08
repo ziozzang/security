@@ -1,12 +1,17 @@
 
 # Server Installation
 
+* Check https://github.com/ziozzang/security/raw/master/run_clair.sh
+
 ```
 # Update DB daily. pull it in the morning!
 DATE=`date +%Y-%m-%d`
 docker pull arminc/clair-db:${DATE}
 docker run -d --name clair-db arminc/clair-db:${DATE}
 docker run -p 6060:6060 --link clair-db:postgres -d --name clair-server arminc/clair-local-scan:v2.0.0
+
+# or Just download Shell script.
+wget https://github.com/ziozzang/security/raw/master/run_clair.sh && chmod +x run_clair.sh
 
 ```
 
