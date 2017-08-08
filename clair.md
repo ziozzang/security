@@ -19,3 +19,8 @@ docker run -p 6060:6060 --link clair-db:postgres -d --name clair-server arminc/c
 
 # Source
 https://github.com/coreos/clair
+
+# Comments
+* https://github.com/arminc/clair-local-scan/blob/master/.travis.yml
+DB is automatically downloaded from original source. but It's too long to download. so, just fetch from docker hub. :)
+travis automatically generate DB. :)
