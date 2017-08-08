@@ -11,7 +11,7 @@ if [[ `uname` == 'Linux' ]]; then
    else
      CDATE=`date +%Y-%m-%d`
      YDATE=`date -d -1days +%Y-%m-%d`
-   if
+   fi
 else
    # For OSX
    CDATE=`date +%Y-%m-%d`
