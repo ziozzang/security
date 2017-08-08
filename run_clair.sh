@@ -21,11 +21,7 @@ else
    YDATE=`date -j -v -1d  +%Y-%m-%d`
    YYDATE=`date -j -v -2d  +%Y-%m-%d`
 fi
-echo $CDATE
-echo $YDATE
-echo $YYDATE
 DATE=${CDATE}
-
 
 # Kill Containers
 docker rm -f clair-server || true
@@ -35,11 +31,9 @@ docker rm -f clair-db || true
 docker pull arminc/clair-db:${DATE}
 if [ `docker images arminc/clair-db:${DATE} | grep "arminc/clair-db" | wc -l` -eq "0" ]; then
   # If failed, try yesterday.
-  echo "FAILED"
   DATE=${YDATE}
   docker pull arminc/clair-db:${DATE}
   if [ `docker images arminc/clair-db:${DATE} | grep "arminc/clair-db" | wc -l` -eq "0" ]; then
-    echo "$DATE FAILED"
     DATE=${YYDATE}
     docker pull arminc/clair-db:${DATE}
   fi
