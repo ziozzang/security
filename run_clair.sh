@@ -19,8 +19,10 @@ docker rm -f clair-server || true
 docker rm -f clair-db || true
 
 # Fetch Today's version
+docker pull arminc/clair-db:${DATE}
+
 docker run -d --name clair-db arminc/clair-db:${DATE}
-if [ $? -ne "0" ]; then
+if [ `docker images arminc/clair-db:${DATE}` -ne "0" ]; then
   # If failed, try yesterday.
   DATE=${YDATE}
   docker run -d --name clair-db arminc/clair-db:${DATE}
