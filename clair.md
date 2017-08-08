@@ -19,7 +19,7 @@ wget https://github.com/ziozzang/security/raw/master/run_clair.sh && chmod +x ru
 
 * using [reg](https://github.com/jessfraz/reg#vulnerability-reports)
 ```
-./reg -r asdf.img.url -d vulns --clair http://127.0.0.1:6060 sandbox/base
+./reg -d -r registry.access.redhat.com  vulns --clair http://127.0.0.1:6060 rhel7-atomic
 ```
 
 # Source
