@@ -4,9 +4,14 @@
 # - to run Clair server with latest updated DB
 #
 
-if [[ $platform == 'linux' ]]; then
-   CDATE=`date +%Y-%m-%d`
-   YDATE=`date -d -1days +%Y-%m-%d`
+if [[ `uname` == 'Linux' ]]; then
+   if [ -f "/bin/busybox" ]; then
+     CDATE=`date -I`
+     YDATE=`date -D "%s" -d $(( $(/bin/date +%s ) - 86400 )) +%Y-%m-%d`
+   else
+     CDATE=`date +%Y-%m-%d`
+     YDATE=`date -d -1days +%Y-%m-%d`
+   if
 else
    # For OSX
    CDATE=`date +%Y-%m-%d`
@@ -20,13 +25,12 @@ docker rm -f clair-db || true
 
 # Fetch Today's version
 docker pull arminc/clair-db:${DATE}
-
-docker run -d --name clair-db arminc/clair-db:${DATE}
-if [ `docker images arminc/clair-db:${DATE}` -ne "0" ]; then
+if [ `docker images arminc/clair-db:${DATE} | grep "arminc/clair-db" | wc -l` -eq "0" ]; then
   # If failed, try yesterday.
   DATE=${YDATE}
-  docker run -d --name clair-db arminc/clair-db:${DATE}
+  docker pull arminc/clair-db:${DATE}
 fi
+docker run -d --name clair-db arminc/clair-db:${DATE}
 
 while true; do
   # wait to open port on DB server
