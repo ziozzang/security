@@ -15,11 +15,14 @@ if [[ `uname` == 'Linux' ]]; then
      YDATE=`date -d -1days +%Y-%m-%d`
      YYDATE=`date -d -1days +%Y-%m-%d`
    fi
-else
+elif [[ `uname` == 'Darwin' ]]; then
    # For OSX
    CDATE=`date +%Y-%m-%d`
    YDATE=`date -j -v -1d  +%Y-%m-%d`
    YYDATE=`date -j -v -2d  +%Y-%m-%d`
+else
+  echo "Can't determine OS"
+  exit 1
 fi
 DATE=${CDATE}
 
