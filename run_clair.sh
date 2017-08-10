@@ -13,7 +13,7 @@ if [[ `uname` == 'Linux' ]]; then
    else
      CDATE=`date +%Y-%m-%d`
      YDATE=`date -d -1days +%Y-%m-%d`
-     YYDATE=`date -d -1days +%Y-%m-%d`
+     YYDATE=`date -d -2days +%Y-%m-%d`
    fi
 elif [[ `uname` == 'Darwin' ]]; then
    # For OSX
